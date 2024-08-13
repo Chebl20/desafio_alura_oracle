@@ -1,14 +1,18 @@
+// Seletores dos elementos
 var input1 = document.querySelector('textarea#txt-area1');
 var input2 = document.querySelector('textarea#txt-area2');
 var message = document.getElementById("msg");
 var encryptionMethod = document.getElementById('encryption-method');
 var button1 = document.querySelector('button.btn-1');
-var button2 = document.querySelector('button.btn-2'); 
+var button2 = document.querySelector('button.btn-2');
 
-button1.onclick = function() {
+// Função para criptografar e descriptografar conforme o método selecionado
+button1.onclick = function () {
     var method = encryptionMethod.value;
-    if (method === 'binary') {
-        encryptBinary();
+    if (method === 'alura') {
+        encryptAlura();
+    } else if (method === 'binary') {
+        encryptB();
     } else if (method === 'sha256') {
         encryptSHA();
     } else if (method === 'base64') {
@@ -16,9 +20,11 @@ button1.onclick = function() {
     }
 };
 
-button2.onclick = function() {
+button2.onclick = function () {
     var method = encryptionMethod.value;
-    if (method === 'binary') {
+    if (method === 'alura') {
+        decryptAlura();
+    } else if (method === 'binary') {
         decryptB();
     } else if (method === 'sha256') {
         decryptSHA();
@@ -26,11 +32,55 @@ button2.onclick = function() {
         decryptBase64();
     }
 };
+function encryptAlura() {
+    if (input1.value.length === 0) {
+        document.getElementById('none').innerHTML = '<h2 id="none">Nenhuma mensagem encontrada</h2>';
+        input1.focus();
+    } else {
+        document.getElementById('none').innerHTML = '';
+        document.querySelector('#icone').style.display = 'none';
 
-document.getElementById('none').innerHTML = '';
-input1.focus();
+        var text = input1.value;
+        console.log('Texto original:', text);
+        
+        var txt = text.replace(/e/igm, 'enter')
+                      .replace(/i/igm, 'imes')
+                      .replace(/a/igm, 'ai')
+                      .replace(/o/igm, 'ober')
+                      .replace(/u/igm, 'ufat');
+        
+        console.log('Texto criptografado:', txt);
+        document.getElementById('txt-area2').innerHTML = txt;
 
-function encryptBinary() {
+        document.getElementById('copy').innerHTML = '<button class="button btn-3" onclick="copy()">Copiar</button>';
+    }
+}
+
+function decryptAlura() {
+    if (input1.value.length === 0) {
+        document.getElementById('none').innerHTML = '<h2 id="none">Nenhuma mensagem encontrada</h2>';
+        input1.focus();
+    } else {
+        document.getElementById('none').innerHTML = '';
+        document.querySelector('img.icone').style.display = 'none';
+
+        var text = input1.value;
+        console.log('Texto original:', text);
+        
+        var txt = text.replace(/enter/igm, 'e')
+                      .replace(/imes/igm, 'i')
+                      .replace(/ai/igm, 'a')
+                      .replace(/ober/igm, 'o')
+                      .replace(/ufat/igm, 'u');
+        
+        console.log('Texto descriptografado:', txt);
+        document.getElementById('txt-area2').innerHTML = txt;
+
+        document.getElementById('copy').innerHTML = '<button class="button btn-3" onclick="copy()">Copiar</button>';
+    }
+}
+
+function encryptB() {
     if (input1.value.length === 0) {
         document.getElementById('none').innerHTML = 'Sem mensagem';
         input1.focus();
