@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codificador de texto</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/log_alura.png"> 
+</head>
+<body>
+    <header>
+        <img class="logo" src="img/alura.svg" alt="alura">
+        <h1 class="title">Desafio Codificador Texto</h1>
+        <!-- Menu de seleção para escolher o método de criptografia -->
+        <select id="encryption-method" class="encryption-method">
+            <option value="binary">Binário</option>
+            <option value="sha256">SHA-256</option>
+            <option value="base64">Base64</option>
+        </select>        
+        <!-- Texto informativo -->
+        <p id="info-text" class="info-text">
+            O SHA-256 é um algoritmo de hash criptográfico que é unidirecional. Isso significa que uma vez que os dados são convertidos em um hash SHA-256, não é possível reverter o hash para recuperar o texto original. Portanto, a descriptografia do hash SHA-256 não é possível.
+        </p>
+    </header>
+
+    <div class="main">
+        <div class="encrypt">
+            <textarea cols="10" id="txt-area1" placeholder="Insira seu texto..." class="line text-animation"></textarea>
+            <div class="buttons">
+                <button class="button btn-1">Criptografar</button>
+                <button class="button btn-2">Descriptografar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="decrypt">
+        <div class="icone" id="icone">Criptografia</div>
+        <h2 id="none">Nenhuma mensagem encontrada</h2>
+        <textarea cols="10" readonly id="txt-area2" placeholder="[Digite um texto para criptografia]"></textarea>
+        <h3 id="msg"></h3>
+        <div id="copy"></div>
+    </div>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
