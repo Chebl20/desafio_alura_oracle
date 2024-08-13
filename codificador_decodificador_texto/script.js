@@ -32,17 +32,36 @@ button2.onclick = function () {
         decryptBase64();
     }
 };
+function removeAccents(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // Remove acentos
+}
+
+function containsUppercaseOrAccents(str) {
+    // Verifica se o texto contém letras maiúsculas ou acentos
+    return /[A-ZÀ-ÿ]/.test(str);
+}
+
 function encryptAlura() {
-    if (input1.value.length === 0) {
+    const inputText = input1.value;
+
+    if (inputText.length === 0) {
         document.getElementById('none').innerHTML = '<h2 id="none">Nenhuma mensagem encontrada</h2>';
+        input1.focus();
+    } else if (containsUppercaseOrAccents(inputText)) {
+        // Mostra erro se o texto contém maiúsculas ou acentos
+        document.getElementById('none').innerHTML = '<h2 id="none">O texto deve estar em minúsculas e sem acento</h2>';
+        document.querySelector('#icone').style.display = 'none';
         input1.focus();
     } else {
         document.getElementById('none').innerHTML = '';
         document.querySelector('#icone').style.display = 'none';
 
-        var text = input1.value;
+        // Converte o texto para minúsculas e remove acentos, embora isso não seja mais necessário com a verificação acima
+        var text = removeAccents(inputText).toLowerCase();
+        
         console.log('Texto original:', text);
         
+        // Chaves para criptografar
         var txt = text.replace(/e/igm, 'enter')
                       .replace(/i/igm, 'imes')
                       .replace(/a/igm, 'ai')
@@ -55,6 +74,7 @@ function encryptAlura() {
         document.getElementById('copy').innerHTML = '<button class="button btn-3" onclick="copy()">Copiar</button>';
     }
 }
+
 
 function decryptAlura() {
     if (input1.value.length === 0) {
