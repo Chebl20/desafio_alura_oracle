@@ -62,7 +62,7 @@ function decryptAlura() {
         input1.focus();
     } else {
         document.getElementById('none').innerHTML = '';
-        document.querySelector('img.icone').style.display = 'none';
+        document.querySelector('#icone').style.display = 'none';
 
         var text = input1.value;
         console.log('Texto original:', text);
